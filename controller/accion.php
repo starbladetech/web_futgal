@@ -250,41 +250,58 @@
 							$data = json_decode($json, true);
 
 									foreach ($data["jornadas"] as $k=>$valor) {
+									
+										//var_dump($data["jornadas"][0]['partidos']);
+									
 										if ($valor["partidos"][0]["terminado"] == true) {
 											echo "<main><div class='ficha color'>";
 										}else{
 											echo "<main><div class='ficha'>";				
 										}
-
-										echo "JORNADA ".$valor['idJornada'];
-										echo "<br>";			
+										//
+										echo "JORNADA ".$valor['idJornada'].'<br />';
+										/*echo "<br>";			
 										echo "<span class='fecha'>".$valor["partidos"][0]["fechaCompleta"]."</span>";
-										echo "<br>";
-										foreach ($valor["partidos"] as $k=>$value) {
-
-											if ($value['nombreEquipoLocal'] == '') {
-												$value['nombreEquipoLocal'] = "<span class='descansa'>DESCANSA</span>";
-											} 
-											if ($value['nombreEquipoVisitante'] == '') {
-												$value['nombreEquipoVisitante'] = "<span class='descansa'>DESCANSA</span>";
-											} 
+										echo "<br>";*/
+										
+											$datas=array();
 											
-											echo '<p class="calendario">'.$value['nombreEquipoLocal'].'     ';
-											if ($value["terminado"] == true) {
-												echo '<span class="goles">'.$value['golesLocal'].'-'.$value['golesVisitante'].'</span>';
-											}else{
-												echo '<span class="hora">Hora: '.$value["hora"].'</span>';				
+											foreach ($valor['partidos'] as $k=>$mivalor) {
+												if (!in_array($mivalor['fechaCompleta'], $datas)) {
+													$datas[] = $mivalor['fechaCompleta'];
+												}
 											}
-											echo '    '.$value['nombreEquipoVisitante'];
-											echo '</p>';
+										
+										for($z=0; $z<count($datas);$z++)
+										{			
+											echo "<span class='fecha'>".$datas[$z]."</span>";
+										
+											foreach ($valor["partidos"] as $k=>$value) {
 											
-										}	
+											if($value['fechaCompleta']==$datas[$z])
+											{
+												if ($value['nombreEquipoLocal'] == '') {
+													$value['nombreEquipoLocal'] = "<span class='descansa'>DESCANSA</span>";
+												} 
+												if ($value['nombreEquipoVisitante'] == '') {
+													$value['nombreEquipoVisitante'] = "<span class='descansa'>DESCANSA</span>";
+												} 
+												
+												echo '<p class="calendario">'.$value['nombreEquipoLocal'].'     ';
+												if ($value["terminado"] == true) {
+													echo '<span class="goles">'.$value['golesLocal'].'-'.$value['golesVisitante'].'</span>';
+												}else{
+													echo '<span class="hora">Hora: '.$value["hora"].'</span>';				
+												}
+												echo '    '.$value['nombreEquipoVisitante'];
+												echo '</p>';
+											}
+												
+											}	
+										
+										}
 										echo "</main>";
-									}
-
-							
-
-							
+									}		
  					?> 
 
 						</div>
