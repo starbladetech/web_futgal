@@ -1,0 +1,54 @@
+body	{
+	background:url('images/fondo.jpg') no-repeat;
+	min-height:100%;
+	background-size:cover;
+}
+.button {
+	margin: 0px 50px 0px 50px;
+	float:left;
+	text-align: center;
+	width: 300px;
+	padding: 20px 0px;
+	position: relative;
+	display: inline-block;
+	border-radius: 0.35em;
+	color: #fff !important;
+	text-decoration: none;
+	background-color: #8ebebc;
+	border: 0;
+	cursor: pointer;
+	font-size:2em;
+	border: 1px solid #fff;
+}
+.button	img{
+	width:240px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	border-bottom: dotted 1px rgba(128,128,128,0.5);
+	-moz-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	-webkit-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	-o-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	-ms-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	outline: 0;
+}
+
+.clear: {
+	clear:both;
+}
+.futbol8, .futbol11	{
+	margin: 30px 60px;;
+	height: 200px;
+	width: 100%;
+}
+.categoria	{
+	font-size:3em;
+	color:#fff;
+	margin-bottom: 20px;
+}
+
+
+
