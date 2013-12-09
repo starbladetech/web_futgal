@@ -181,27 +181,51 @@
 
 								$json = file_get_contents("http://www.siguetuliga.com/ws/index.php?s=Liga&fc=jornada&idLiga=$idliga&tipo=b&idSesion=".$idSesion);
 								$dataj = json_decode($json, true);
-								$unafecha = $dataj['jornadaActual']['partidos'][0]['fechaCompleta'];
-								echo "<span class='fechajornada'>".$dataj['jornadaActual']["partidos"][0]["fechaCompleta"]."</span>";
-
-
+								/*
+								PRUEBAS
+								----------------------------------------------------------------------------------------------------------------------
+								*/
+								
+								//var_dump($dataj['jornadaActual']);
+								$datas=array();
 								foreach ($dataj['jornadaActual']['partidos'] as $k=>$valor) {
-									if ($valor['nombreEquipoLocal'] == '') {
-										$valor['nombreEquipoLocal'] = "<span class='descansa'>DESCANSA</span>";
-									} 
-									if ($valor['nombreEquipoVisitante'] == '') {
-										$valor['nombreEquipoVisitante'] = "<span class='descansa'>DESCANSA</span>";
-									} 
-									echo '<p class="jornadaactual">'.$valor['nombreEquipoLocal'].'     ';
-									if ($valor["terminado"] == true) {
-											echo '<span class="goles">'.$valor['golesLocal'].'-'.$valor['golesVisitante'].'</span>';
-										}else{
-											echo '<span class="hora">Hora: '.$valor["hora"].'</span>';				
-										}
 									
-									echo '    '.$valor['nombreEquipoVisitante'].'</p>';
-
-
+									if (!in_array($valor['fechaCompleta'], $datas)) {
+										$datas[] = $valor['fechaCompleta'];
+									}
+									//echo $valor['fechaCompleta'].'<br />';
+								}
+								//var_dump($datas);
+								//echo 'Longitud: '.count($datas);
+								/*
+								----------------------------------------------------------------------------------------------------------------------
+								*/
+								//$unafecha = $dataj['jornadaActual']['partidos'][0]['fechaCompleta'];
+								//echo "<span class='fechajornada'>".$unafecha."</span>";
+								for($z=0; $z<count($datas);$z++)
+								{
+									echo "<span class='fechajornada'>".$datas[$z]."</span>";
+			
+										foreach ($dataj['jornadaActual']['partidos'] as $k=>$valor) {
+										
+											if($valor['fechaCompleta']==$datas[$z])
+											{
+												if ($valor['nombreEquipoLocal'] == '') {
+													$valor['nombreEquipoLocal'] = "<span class='descansa'>DESCANSA</span>";
+												} 
+												if ($valor['nombreEquipoVisitante'] == '') {
+													$valor['nombreEquipoVisitante'] = "<span class='descansa'>DESCANSA</span>";
+												} 
+												echo '<p class="jornadaactual">'.$valor['nombreEquipoLocal'].'     ';
+												if ($valor["terminado"] == true) {
+														echo '<span class="goles">'.$valor['golesLocal'].'-'.$valor['golesVisitante'].'</span>';
+													}else{
+														echo '<span class="hora">Hora: '.$valor["hora"].'</span>';				
+													}
+												
+												echo '    '.$valor['nombreEquipoVisitante'].'</p>';
+											}
+										}
 								}
 
 							?>
