@@ -248,15 +248,15 @@
 
 							$json = file_get_contents("http://www.siguetuliga.com/ws/index.php?s=Liga&fc=calendario&idLiga=$idliga&tipo=b&idSesion=".$idSesion);
 							$data = json_decode($json, true);
-
+							$i=0;
 									foreach ($data["jornadas"] as $k=>$valor) {
-									
+									$i++;
 										//var_dump($data["jornadas"][0]['partidos']);
-									
+										
 										if ($valor["partidos"][0]["terminado"] == true) {
-											echo "<main><div class='ficha color'>";
+											echo "<main><div class='ficha color f".$i."'>";
 										}else{
-											echo "<main><div class='ficha'>";				
+											echo "<main><div class='ficha f".$i."'>";				
 										}
 										//
 										echo "JORNADA ".$valor['idJornada'].'<br />';

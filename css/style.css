@@ -1333,3 +1333,9 @@
 	font-size: 1.3em;
 	font-weight: bold;
 }
+
+.f4, .f7, .f10, .f13, .f16, .f19, .f22, .f25, .f28, .f31, .f34	{
+	clear:both;
+}
+
+
